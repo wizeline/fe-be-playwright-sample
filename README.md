@@ -46,6 +46,7 @@ This project covers the following scenarios and practices:
 
 - Playwright
 - TypeScript
+- GitHub Actions
 
 ## Project Structure
 ```
