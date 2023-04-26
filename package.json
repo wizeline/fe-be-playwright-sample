@@ -1,0 +1,35 @@
+{
+  "name": "playwright_trello",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ui-mode": "npx playwright test --ui",
+    "cards-fe": "playwright test --headed --grep=@Cards @fe",
+    "cards-fe-headless": "playwright test --grep='@Cards @fe'",
+    "cards-fe-chromium": "playwright test --grep=@Cards --project=chromium --headed",
+    "cards-fe-headless-chromium": "playwright test --grep=@Cards --project=chromium",
+    "cards-fe-chromium-html": "playwright test --grep='@Cards' --reporter=line,html --project='chromium'",
+    "cards-fe-chromium-allure": "playwright test --grep='@Cards' --project='chromium' --reporter=line,allure-playwright",
+    "cards-fe-chromium-debug": "playwright test --debug --grep='@Cards' --project='chromium'",
+    "cards-api": "playwright test --project='api' --grep='@Cards @Api'",
+    "boards-api": "playwright test --grep='@Boards @api' --project='api' --headed",
+    "api": "playwright test --project=api",
+    "api-html": "playwright test --project=api --reporter=line,html",
+    "visual": "playwright test --project='chromium' --grep='Visual Automation' --reporter=line,html --headed",
+    "visual-firefox": "playwright test --project='firefox' --grep='Visual Automation' --reporter=line,html --headed",
+    "visual-allure": "playwright test --project='chromium' --grep='Visual Automation' --reporter=line,allure-playwright --headed",
+    "code-gen": "playwright codegen --save-storage=trello-auth.json https://trello.com/ --browser=firefox",
+    "storage-state": "playwright test --grep='Storage State'",
+    "html": "playwright show-report",
+    "allure": "allure generate ./allure-results --clean && allure open ./allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.32.3",
+    "allure-playwright": "^2.0.0-beta.15",
+    "dotenv": "^16.0.0"
+  }
+}
