@@ -5,35 +5,31 @@ export class BoardPage{
     readonly page: Page
     readonly newCardTextarea: Locator
     readonly addCardConfirmButton: Locator
-    readonly listSelector: string
-    readonly addToCardButtonSelector: string
-    readonly newCardTextareaSelector: string
-    readonly addCardConfirmButtonSelector: string
-    readonly cardTitleSelector: string
+    readonly listContainer: Locator
+    readonly addToCardButton: Locator
+    readonly cardTitle: Locator
 
     constructor(page: Page){
         this.page = page
-        //selectors
-        //I use plain selectors for this class so we can build locators dynamically inside the functions
-        this.listSelector = '.js-list-content'
-        this.addToCardButtonSelector = 'text=Add a card'
-        this.newCardTextareaSelector = '.list-card-composer-textarea'
-        this.addCardConfirmButtonSelector = 'text=Add card'
-        this.cardTitleSelector = '.list-card-title'
+        this.listContainer = page.locator('.js-list-content')
+        this.addToCardButton = page.locator('text=Add a card')
+        this.newCardTextarea = page.locator('.list-card-composer-textarea')
+        this.addCardConfirmButton = page.locator('text=Add card')
+        this.cardTitle = page.locator('.list-card-title')
     }
 
     async addNewCardToList(list: string, card: Card, browserName: string){
-        let listLocator: Locator = this.page.locator(this.listSelector, { hasText: list }) //locators can filter by text using the hasText option
+        let listLocator: Locator = this.listContainer.filter({ hasText: list }) //you can use the hasText option to filter locators by text
 
-        await listLocator.locator(this.addToCardButtonSelector).click()
+        await listLocator.locator(this.addToCardButton).click()
         //I use the browserName to generate a unique name per browser so we can execute different browsers in parallel
-        await listLocator.locator(this.newCardTextareaSelector).fill(`${card.title}: ${list} - Browser: ${browserName}`) 
-        await listLocator.locator(this.addCardConfirmButtonSelector).click()
+        await listLocator.locator(this.newCardTextarea).fill(`${card.title}: ${list} - Browser: ${browserName}`) 
+        await listLocator.locator(this.addCardConfirmButton).click()
     }
 
     async assertCardAddedToList(list: string, card: Card, browserName: string){
-        let listLocator: Locator = this.page.locator(this.listSelector, { hasText: list })
-        await expect(listLocator.locator(this.cardTitleSelector, { hasText: `${card.title}: ${list} - Browser: ${browserName}` })).toBeVisible()
+        let listLocator: Locator = this.listContainer.filter({ hasText: list })
+        await expect(listLocator.locator(this.cardTitle, { hasText: `${card.title}: ${list} - Browser: ${browserName}` })).toBeVisible()
     }
 
     async getCardId(){
