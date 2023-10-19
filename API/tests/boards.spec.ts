@@ -19,16 +19,16 @@ test.describe.serial('@Boards @api feature testing', () => {
   })
 
   test('As a user, I want to create a board', async () => {
-    let [response, responseJson] = await boardsRequest.createBoard(BOARD.name)
-    boardId = responseJson['id']
-    boardName = responseJson['name']
+    let [response, responseObject] = await boardsRequest.createBoard(BOARD.name)
+    boardId = responseObject['id']
+    boardName = responseObject['name']
 
     expect(response.status(),`Response: ${await response.text()}`).toBe(200)
   }) 
 
   test('As a user, I want to retrieve a single board', async () => {
-    let [response, responseJson] = await boardsRequest.getBoard(boardId)
-    let retrievedBoardName = responseJson['name']  
+    let [response, responseObject] = await boardsRequest.getBoard(boardId)
+    let retrievedBoardName = responseObject['name']  
 
     expect(response.status(),`Response: ${await response.text()}`).toBe(200)
     expect(retrievedBoardName,`Response: ${await response.text()}`).toBe(boardName)

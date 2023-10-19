@@ -34,8 +34,8 @@ export class BoardPage{
 
     async getCardId(){
         let response = await this.page.waitForResponse(response => response.url().includes('/cards') && response.status() === 200)
-        let responseJson = await response.json()
-        let cardId = responseJson['id']
+        let responseObject = await response.json()
+        let cardId = responseObject['id']
 
         return cardId
     }

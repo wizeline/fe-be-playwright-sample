@@ -19,16 +19,16 @@ export class BoardsAPI{
 
     async getBoard(boardId: string){
         let response = await this.request.get(`${this.baseUrl}boards/${boardId}?${this.authorization}`)
-        let responseJson = await response.json()
+        let responseObject = await response.json()
 
-        return [response, responseJson]
+        return [response, responseObject]
     }
 
     async createBoard(boardName: string){
         let response = await this.request.post(`${this.baseUrl}boards?name=${boardName}&${this.authorization}`)
-        let responseJson = await response.json()
+        let responseObject = await response.json()
 
-        return [response, responseJson]
+        return [response, responseObject]
     }
 
     async deleteBoard(boardId: string){
