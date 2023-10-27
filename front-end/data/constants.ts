@@ -24,6 +24,7 @@ export const CARD: Card = {
     description: 'New card added'
 }
 
+// This ID can be found in the boards section of the Spacework call response.
 export const BOARD: Board = {
     id: '6398f2c66ffb2f04bbffedd3',
     name: 'Automation Board'
